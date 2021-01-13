@@ -48,7 +48,7 @@
   </script>
 </head>
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div id="load-controls" class="col-sm-3">
         <form action="#">
@@ -69,53 +69,49 @@
         <div class="row">
           <div id="proxy-container" class="col-sm-6"></div>
           <div id="fancy-header" class="col-sm-6">
-            <span style="word-wrap: normal;"><h1 style="float:left;">APM Dyno</h1>
+            <div class="row">
+              <span style="word-wrap: normal;"><h1 style="float:left;">APM Dyno</h1>
                 <img src="static/dino.jpg" width="100px"><br>
                 Dyno can load test your Opbeans applications.<br><br>
                 Start load tests for services on the left and control<br>
                 the performance of services using their respective sliders.<p></p>
-            </span>
-            <table>
-                <thead>
-                    <th>Load generator</th><th><div style="fload: left;color:#68B847">&#9632;</div></th>
-                </thead>
-                <tr>
-                    <td>W: Workers</td>
-                <tr>
-                    <td>Er: Error rate</td>
-                </tr>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <thead>
-                    <th>Network conditions</th><th><div style="float: left;color:#8B4768">&#9632;</div></th>
-                </thead>
-                <tr>
-                    <td>L: Latency</td>
-                    <td>J: Jitter</td>
-                </tr>
-                <tr>
-                    <td>B: Bandwidth</td>
-                    <td>SC: Slow close</td>
-                </tr>
-                <tr>
-                    <td>Sas: Slicer [Avg size]</td>
-                    <td>Ssv: Slicer [Delay]</td>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <thead>
-                    <th style="float: left;">Operating system &thinsp;<div style="float:right;color:#4768B8">&#9632;</div></th>
-                </thead>
-                <tr>
-                    <td>CPU: Processor quota</td>
-                </tr>
-                <tr>
-                    <td>Mem: Container memory</td>
-                </tr>
-            </table>
+              </span>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="card">
+                  <h5 class="card-header bg-success">Load Generator</h5>
+                  <div class="card-body">
+                    <p class="card-text"><span class="fw-bold">W:</span> Workers</p>
+                    <p class="card-text"><span class="fw-bold">Er:</span> Error rate</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="card">
+                  <h5 class="card-header bg-danger">Network conditions</h5>
+                  <div class="card-body">
+                    <p class="card-text"><span class="fw-bold">L:</span> Latency</p>
+                    <p class="card-text"><span class="fw-bold">J:</span> Jitter</p>
+                    <p class="card-text"><span class="fw-bold">B:</span> Bandwidth</p>
+                    <p class="card-text"><span class="fw-bold">SC:</span> Slow close</p>
+                    <p class="card-text"><span class="fw-bold">Sas:</span> Slicer [Avg size]</p>
+                    <p class="card-text"><span class="fw-bold">Ssv:</span> Slicer [Delay]</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="card">
+                  <h5 class="card-header bg-primary">Operating system</h5>
+                  <div class="card-body">
+                    <p class="card-text"><span class="fw-bold">CPU:</span> Processor quota</p>
+                    <p class="card-text"><span class="fw-bold">Mem:</span> Container memory</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
