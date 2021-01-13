@@ -82,9 +82,10 @@ function drawProxies(r) {
 
 function drawProxy(proxy) {  
   $("#proxy-container").append(
-    `<div style="float:left;" id="${ proxy.name }-container">` + 
-    `<p id="${ proxy.name }-header" class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">` +
-    `<span style="float:left; margin:-2px 5px 0 0;" class="proxy-name">${proxy.name}</span></p></div>`
+    `<div class="card" id="${ proxy.name }-card">
+    <h5 class="card-header" id="${ proxy.name }-header">${proxy.name}</h5>
+    <div class="card-body" id="${ proxy.name }-container"></div>
+  </div>`
     );
   drawSliders(proxy.name);
   drawServiceEnable(proxy.name);
