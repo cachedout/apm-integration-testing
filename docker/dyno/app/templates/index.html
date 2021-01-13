@@ -50,62 +50,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div id="fancy-header", style="float: right; width: 500px">
-        <span style="word-wrap: normal;"><h1 style="float:left;">APM Dyno</h1>
-            <img src="static/dino.jpg" width="100px"><br>
-            Dyno can load test your Opbeans applications.<br><br>
-            Start load tests for services on the left and control<br>
-            the performance of services using their respective sliders.<p></p>
-        </span>
-        <table>
-            <thead>
-                <th>Load generator</th><th><div style="fload: left;color:#68B847">&#9632;</div></th>
-            </thead>
-            <tr>
-                <td>W: Workers</td>
-            <tr>
-                <td>Er: Error rate</td>
-            </tr>
-            </tr>
-        </table>
-        <br>
-        <table>
-            <thead>
-                <th>Network conditions</th><th><div style="float: left;color:#8B4768">&#9632;</div></th>
-            </thead>
-            <tr>
-                <td>L: Latency</td>
-                <td>J: Jitter</td>
-            </tr>
-            <tr>
-                <td>B: Bandwidth</td>
-                <td>SC: Slow close</td>
-            </tr>
-            <tr>
-                <td>Sas: Slicer [Avg size]</td>
-                <td>Ssv: Slicer [Delay]</td>
-            </tr>
-        </table>
-        <br>
-        <table>
-            <thead>
-                <th style="float: left;">Operating system &thinsp;<div style="float:right;color:#4768B8">&#9632;</div></th>
-            </thead>
-            <tr>
-                <td>CPU: Processor quota</td>
-            </tr>
-            <tr>
-                <td>Mem: Container memory</td>
-            </tr>
-        </table>
-      </div>
-      <div id="proxy-container" style="padding:4px;margin-left: 185px; width:1050px;"></div>
-      <div id="load-container" style="padding: 4px; width: 180px; position: fixed;">
-
-
-
-                    
-      <div id="load-controls">
+      <div id="load-controls" class="col-sm-3">
         <form action="#">
           <fieldset>
             <label for="scenarios">Select a load generation scenario</label>
@@ -120,6 +65,63 @@
             </div>
 
       </div>
+      <div class="col-sm-9">
+        <div class="row">
+          <div id="proxy-container" class="col-sm-6"></div>
+          <div id="fancy-header" class="col-sm-6">
+            <span style="word-wrap: normal;"><h1 style="float:left;">APM Dyno</h1>
+                <img src="static/dino.jpg" width="100px"><br>
+                Dyno can load test your Opbeans applications.<br><br>
+                Start load tests for services on the left and control<br>
+                the performance of services using their respective sliders.<p></p>
+            </span>
+            <table>
+                <thead>
+                    <th>Load generator</th><th><div style="fload: left;color:#68B847">&#9632;</div></th>
+                </thead>
+                <tr>
+                    <td>W: Workers</td>
+                <tr>
+                    <td>Er: Error rate</td>
+                </tr>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <th>Network conditions</th><th><div style="float: left;color:#8B4768">&#9632;</div></th>
+                </thead>
+                <tr>
+                    <td>L: Latency</td>
+                    <td>J: Jitter</td>
+                </tr>
+                <tr>
+                    <td>B: Bandwidth</td>
+                    <td>SC: Slow close</td>
+                </tr>
+                <tr>
+                    <td>Sas: Slicer [Avg size]</td>
+                    <td>Ssv: Slicer [Delay]</td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <th style="float: left;">Operating system &thinsp;<div style="float:right;color:#4768B8">&#9632;</div></th>
+                </thead>
+                <tr>
+                    <td>CPU: Processor quota</td>
+                </tr>
+                <tr>
+                    <td>Mem: Container memory</td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div id="load-container" class="col-sm"></div>
     </div>
   </div>
 </div>
