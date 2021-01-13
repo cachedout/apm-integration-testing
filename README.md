@@ -216,7 +216,7 @@ For each service, different classes of network failure can be introduced and adj
 | **B**    | Bandwidth | The overall amount of bandwidth available to the connection | 
 | **T**    | Timeout   | Stops all data from getting through, and closes the connection after timeout. If timeout is 0, the connection won't close, and data will be delayed until the timeout is increased.|
 | **Sas**  | Packet slice average size | Slice TCP packets into this average size |
-| **Ssd**  | Packet slice average delay | Introduce delay between the transmission of each packet |
+| **Ssv*  | Packet slice average delay | Introduce delay between the transmission of each packet |
 
 ### Modifying system properties
 

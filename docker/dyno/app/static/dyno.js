@@ -172,7 +172,7 @@ function drawSliders(service_name){
         <td><span id="B" class="toxi_slide"></span></td>\
         <td><span id="SC" class="toxi_slide"></span></td>\
         <td><span id="Sas" class="toxi_slide"></span></td>\
-        <td><span id="Ssd" class="toxi_slide"></span></td>\
+        <td><span id="Ssv" class="toxi_slide"></span></td>\
         <td><span id="CPU" class="docker_slide"></span></td>\
         <td><span id="Mem" class="docker_slide"></span></td>\
         </tr>\
@@ -184,7 +184,7 @@ function drawSliders(service_name){
         <td align="center">B</td>\
         <td align="center">SC</td>\
         <td align="center">Sas</td>\
-        <td align="center">Ssd</td>\
+        <td align="center">Ssv</td>\
         <td align="center">CPU</td>\
         <td align="center">Mem</td>\
         </tr>\
