@@ -161,7 +161,7 @@ function drawLg(r) {
 
 function drawSliders(service_name){
   $ ("#"+service_name+"-container").append(
-    '<div style="margin: 15px" id="eq-'+service_name+`" class="eq">\
+    '<div id="eq-'+service_name+`" class="eq">\
       <table>\
         <tr>\
         <td><span id="W" class="molotov_slide"></span></td>\
@@ -357,7 +357,7 @@ function handleToxiSlideChange(event, ui){
 }
 
 function drawServiceEnable(service_name) {
-  $( `#${ service_name }-header`).after(
+  $( `#eq-${ service_name }`).before(
     `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="checkbox-${ service_name }"><label class="form-check-label" for="checkbox-${ service_name }">Enabled?</label></div>`
   );
   $( "input[type='checkbox']" ).checkboxradio();
