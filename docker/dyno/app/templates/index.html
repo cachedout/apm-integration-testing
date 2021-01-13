@@ -48,7 +48,9 @@
   </script>
 </head>
 <body>
-    <div id="fancy-header", style="float: right; width: 500px">
+  <div class="container">
+    <div class="row">
+      <div id="fancy-header", style="float: right; width: 500px">
         <span style="word-wrap: normal;"><h1 style="float:left;">APM Dyno</h1>
             <img src="static/dino.jpg" width="100px"><br>
             Dyno can load test your Opbeans applications.<br><br>
@@ -96,27 +98,29 @@
                 <td>Mem: Container memory</td>
             </tr>
         </table>
+      </div>
+      <div id="proxy-container" style="padding:4px;margin-left: 185px; width:1050px;"></div>
+      <div id="load-container" style="padding: 4px; width: 180px; position: fixed;">
+
+
+
+                    
+      <div id="load-controls">
+        <form action="#">
+          <fieldset>
+            <label for="scenarios">Select a load generation scenario</label>
+            <p></p>
+            <select name="scenarios" id="scenarios_selector">
+              <option selected="selected">Default</option>
+            </select>
+            <hr>
+            <div id="load-stats" style="width: 40px">
+                <table id="get_stats" style="float:left;"></table>
+                <table id="post_stats" style="float:left;"></table>
+            </div>
+
+      </div>
     </div>
-    <div id="proxy-container" style="padding:4px;margin-left: 185px; width:1050px;"></div>
-    <div id="load-container" style="padding: 4px; width: 180px; position: fixed;">
-
-
-
-                   
-  <div id="load-controls">
-    <form action="#">
-      <fieldset>
-        <label for="scenarios">Select a load generation scenario</label>
-        <p></p>
-        <select name="scenarios" id="scenarios_selector">
-          <option selected="selected">Default</option>
-        </select>
-        <hr>
-        <div id="load-stats" style="width: 40px">
-            <table id="get_stats" style="float:left;"></table>
-            <table id="post_stats" style="float:left;"></table>
-        </div>
-
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
