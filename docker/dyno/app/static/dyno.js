@@ -105,11 +105,12 @@ function drawLg(r) {
     var port = s.listen.split(":").pop();
     if (service_name.startsWith("opbeans")){
       $("#load-controls").append(
-        `<div id="${service_name}-container">` +
-        `<p id="${service_name}-header" class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">` +
-        `<span style="margin:-2px 5px 0 0;">${service_name}</span>` +
-        `</p><div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${ service_name }"><label class="form-check-label" for="lg-checkbox-${ service_name }">Load test</label></div>` +
-        `</div>`
+        `<div class="card" id="${service_name}-container">
+        <h5 class="card-header bg-secondary">${service_name}</h5>
+        <div class="card-body">
+        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${ service_name }"><label class="form-check-label" for="lg-checkbox-${ service_name }">Load test</label></div>
+        </div>
+      </div>`
       );
       // Check the box if a job is already running
       $.get({
