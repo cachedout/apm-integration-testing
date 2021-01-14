@@ -170,16 +170,16 @@ function drawSliders(service_name){
     '<div id="eq-'+service_name+`" class="eq">\
       <table>\
         <tr>\
-        <td><span id="W" class="molotov_slide"></span></td>\
-        <td><span id="Er" class="molotov_slide"></span></td>\
-        <td><span id="L" class="toxi_slide"></span></td>\
-        <td><span id="J" class="toxi_slide"></span></td>\
-        <td><span id="B" class="toxi_slide"></span></td>\
-        <td><span id="SC" class="toxi_slide"></span></td>\
-        <td><span id="Sas" class="toxi_slide"></span></td>\
-        <td><span id="Sd" class="toxi_slide"></span></td>\
-        <td><span id="CPU" class="docker_slide"></span></td>\
-        <td><span id="Mem" class="docker_slide"></span></td>\
+        <td><span id="W" class="slider molotov_slide"></span></td>\
+        <td><span id="Er" class="slider molotov_slide"></span></td>\
+        <td><span id="L" class="slider toxi_slide"></span></td>\
+        <td><span id="J" class="slider toxi_slide"></span></td>\
+        <td><span id="B" class="slider toxi_slide"></span></td>\
+        <td><span id="SC" class="slider toxi_slide"></span></td>\
+        <td><span id="Sas" class="slider toxi_slide"></span></td>\
+        <td><span id="Sd" class="slider toxi_slide"></span></td>\
+        <td><span id="CPU" class="slider docker_slide"></span></td>\
+        <td><span id="Mem" class="slider docker_slide"></span></td>\
         </tr>\
         <tr>\
         <td align="center"><div class="p-1 mb-1 bg-success text-white">W</div></td>\
