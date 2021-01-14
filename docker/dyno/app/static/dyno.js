@@ -53,10 +53,15 @@ function processMolotov(data){
       } 
     }
   }
-  $('#get_stats').empty();
-  $('#post_stats').empty();
-  $('#get_stats').text('GET req/min');
-  $('#post_stats').text('POST req/min');
+  $('#get_stats').html(`<h5 class="card-header bg-success">GET req/min</h5>
+  <div class="card-body">
+    <table id="get_stats_table" style="float:left;"></table>
+  </div>`);
+  $('#post_stats').html(`<h5 class="card-header bg-success">POST req/min</h5>
+  <div class="card-body">
+    <table id="post_stats_table" style="float:left;"></table>
+  </div>`);
+
   for (let [h, v] of Object.entries(get_stats)){
 
     if (Object.keys(sparkMap.getMap).includes(h)){
@@ -67,12 +72,12 @@ function processMolotov(data){
           } else {
             sparkMap['getMap'][h] = [v];
           }
-    $('#get_stats').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${v * 12}</td></tr>`);
+    $('#get_stats_table').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${v * 12}</td></tr>`);
     $(`#get-spark-${h}`).sparkline(sparkMap['getMap'][h])
 
   }
   for (let [h, v] of Object.entries(post_stats)){
-    $('#post_stats').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${v * 20}</td></tr>`);
+    $('#post_stats_table').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${v * 20}</td></tr>`);
   }
 }
 
@@ -106,7 +111,7 @@ function drawLg(r) {
     if (service_name.startsWith("opbeans")){
       $("#load-controls").append(
         `<div class="card" id="${service_name}-container">
-        <h5 class="card-header bg-secondary">${service_name}</h5>
+        <h5 class="card-header bg-secondary">#${idx} - ${service_name}</h5>
         <div class="card-body">
         <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${ service_name }"><label class="form-check-label" for="lg-checkbox-${ service_name }">Load test</label></div>
         </div>
