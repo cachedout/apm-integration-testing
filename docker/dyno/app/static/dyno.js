@@ -145,7 +145,7 @@ function drawLg(r) {
               data: JSON.stringify(job_data),
               dataType: 'json',
               success: function(result){
-                console.log('Sent request to enable LG. result: ' + result)
+                console.log('Sent request to enable LG in '+ service_name +'. result: ' + result)
               }
             })
       } else {
@@ -386,7 +386,7 @@ function generateEnableDisableProxyObject(enable, serviceName) {
     contentType: "application/json",
     dataType: 'json',
     success: function(result){
-      console.log('Sent request to ' + enableStr + '. result: ' + result)
+      console.log('Sent request to ' + enableStr + ' ' + serviceName +  '. result: ' + result)
     }
   }
 }
