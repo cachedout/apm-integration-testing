@@ -87,7 +87,7 @@ function drawProxies(r) {
 
 function drawProxy(proxy) {  
   $("#proxy-container").append(
-    `<div class="col-sm-6"><div class="card" id="${ proxy.name }-card">
+    `<div class="col-lg-4"><div class="card" id="${ proxy.name }-card">
     <h5 class="card-header" id="${ proxy.name }-header">${proxy.name}</h5>
     <div class="card-body" id="${ proxy.name }-container"></div>
   </div></div>`

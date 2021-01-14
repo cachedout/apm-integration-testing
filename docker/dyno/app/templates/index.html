@@ -125,22 +125,19 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div id="load-controls" class="col-sm-3">
-        <form action="#">
-          <fieldset>
-            <label for="scenarios">Select a load generation scenario</label>
-            <p></p>
-            <select name="scenarios" id="scenarios_selector" class="form-select" aria-label="Load generation examples selector">
-              <option selected="selected">Default</option>
-            </select>
-            <hr>
-            <div id="load-stats">
-              <div id="get_stats" class="card" id="get-stats-card"></div>
-              <div id="post_stats" class="card" id="post-stats-card"></div>
-            </div>
-
+      <div id="load-controls" class="col-sm-2">
+          <label for="scenarios">Select a load generation scenario</label>
+          <p></p>
+          <select name="scenarios" id="scenarios_selector" class="form-select" aria-label="Load generation examples selector">
+            <option selected="selected">Default</option>
+          </select>
+          <hr>
+          <div id="load-stats">
+            <div id="get_stats" class="card" id="get-stats-card"></div>
+            <div id="post_stats" class="card" id="post-stats-card"></div>
+          </div>
       </div>
-      <div class="col-sm-9">
+      <div class="col-sm-10">
         <div class="row" id="proxy-container"></div>
       </div>
     </div>
