@@ -182,28 +182,17 @@ function drawSliders(service_name){
         <td><span id="Mem" class="docker_slide"></span></td>\
         </tr>\
         <tr>\
-        <td align="center">W</td>\
-        <td align="center">Er</td>\
-        <td align="center">L</td>\
-        <td align="center">J</td>\
-        <td align="center">B</td>\
-        <td align="center">SC</td>\
-        <td align="center">Sas</td>\
-        <td align="center">Sd</td>\
-        <td align="center">CPU</td>\
-        <td align="center">Mem</td>\
+        <td align="center"><div class="p-1 mb-1 bg-success text-white">W</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-success text-white">Er</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">L</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">J</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">B</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">SC</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">Sas</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-danger text-white">Sd</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-primary text-white">CPU</div></td>\
+        <td align="center"><div class="p-1 mb-1 bg-primary text-white">Mem</div></td>\
         </tr>\
-        <tr>\
-        <td align="center"><div style="color:#68B847">&#9632;</div></td>\
-        <td align="center"><div style="color:#68B847">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#4768B8">&#9632;</div></td>\
-        <td align="center"><div style="color:#4768B8">&#9632;</div></td>\
       </table>\
   </div>`
   );
