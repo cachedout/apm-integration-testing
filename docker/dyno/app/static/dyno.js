@@ -53,11 +53,11 @@ function processMolotov(data){
       } 
     }
   }
-  $('#get_stats').html(`<h5 class="card-header bg-success">GET req/min</h5>
+  $('#get_stats').html(`<h5 class="card-header bg-success text-white">GET req/min</h5>
   <div class="card-body">
     <table id="get_stats_table" style="float:left;"></table>
   </div>`);
-  $('#post_stats').html(`<h5 class="card-header bg-success">POST req/min</h5>
+  $('#post_stats').html(`<h5 class="card-header bg-success text-white">POST req/min</h5>
   <div class="card-body">
     <table id="post_stats_table" style="float:left;"></table>
   </div>`);
@@ -111,7 +111,7 @@ function drawLg(r) {
     if (service_name.startsWith("opbeans")){
       $("#load-controls").append(
         `<div class="card" id="${service_name}-container">
-        <h5 class="card-header bg-secondary">#${idx} - ${service_name}</h5>
+        <h5 class="card-header bg-secondary text-white">#${idx} - ${service_name}</h5>
         <div class="card-body">
         <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${ service_name }"><label class="form-check-label" for="lg-checkbox-${ service_name }">Load test</label></div>
         </div>
