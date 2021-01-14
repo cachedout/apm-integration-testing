@@ -355,14 +355,14 @@ function drawServiceEnable(service_name) {
   $( `#eq-${ service_name }`).before(
     `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="checkbox-${ service_name }"><label class="form-check-label" for="checkbox-${ service_name }">Enabled?</label></div>`
   );
-  $( "input[type='checkbox']" ).checkboxradio();
+
   $.get({
         url: `http://localhost:`+window.location.port+`/api/app?name=${service_name}`,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
             if (result.enabled == true){
-              $(`#checkbox-${ service_name }`).prop('checked',true).checkboxradio('refresh');
+              $(`#checkbox-${ service_name }`).prop('checked',true);
             }
         }
       });
