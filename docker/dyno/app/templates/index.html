@@ -18,9 +18,7 @@
   <script src="static/jquery.sparkline.js"></script>
   <script src="static/dyno.js"></script>
   <script>
-  $( function() {
-
-  
+  $( function() { 
     var stats_socket = io.connect('http://localhost:8127');
     stats_socket.on('connect', function (data) {
       stats_socket.emit('subscribe', 'all');
@@ -56,6 +54,11 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="modal" data-bs-target="#legendModal" aria-current="page" href="#">Legend</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -66,6 +69,58 @@
       <img src="static/dino.jpg" width="100px">
     </h1>
     <p>Start load tests for services on the left and control the performance of services using their respective sliders</p>
+  </div>
+
+  <div id="legendModal" class="modal" tabindex="-1" aria-labelledby="legendModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="legendModalLabel">APM Dyno Info</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-4">
+              <div class="card">
+                <h5 class="card-header bg-success text-white">Load Generator</h5>
+                <div class="card-body">
+                  <p class="card-text"><span class="fw-bold">W:</span> Workers</p>
+                  <p class="card-text"><span class="fw-bold">Er:</span> Error rate</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card">
+                <h5 class="card-header bg-danger text-white">Network conditions</h5>
+                <div class="card-body">
+                  <p class="card-text"><span class="fw-bold">L:</span> Latency</p>
+                  <p class="card-text"><span class="fw-bold">J:</span> Jitter</p>
+                  <p class="card-text"><span class="fw-bold">B:</span> Bandwidth</p>
+                  <p class="card-text"><span class="fw-bold">SC:</span> Slow close</p>
+                  <p class="card-text"><span class="fw-bold">Sas:</span> Slicer [Avg size]</p>
+                  <p class="card-text"><span class="fw-bold">Ssd:</span> Slicer [Delay]</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card">
+                <h5 class="card-header bg-primary text-white">Operating system</h5>
+                <div class="card-body">
+                  <p class="card-text"><span class="fw-bold">CPU:</span> Processor quota</p>
+                  <p class="card-text"><span class="fw-bold">Mem:</span> Container memory</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="container-fluid">
@@ -86,51 +141,10 @@
 
       </div>
       <div class="col-sm-9">
-        <div class="row">
-          <div id="proxy-container" class="col-sm-6"></div>
-          <div id="fancy-header" class="col-sm-6">
-            <div class="row">
-              <div class="col-4">
-                <div class="card">
-                  <h5 class="card-header bg-success text-white">Load Generator</h5>
-                  <div class="card-body">
-                    <p class="card-text"><span class="fw-bold">W:</span> Workers</p>
-                    <p class="card-text"><span class="fw-bold">Er:</span> Error rate</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-4">
-                <div class="card">
-                  <h5 class="card-header bg-danger text-white">Network conditions</h5>
-                  <div class="card-body">
-                    <p class="card-text"><span class="fw-bold">L:</span> Latency</p>
-                    <p class="card-text"><span class="fw-bold">J:</span> Jitter</p>
-                    <p class="card-text"><span class="fw-bold">B:</span> Bandwidth</p>
-                    <p class="card-text"><span class="fw-bold">SC:</span> Slow close</p>
-                    <p class="card-text"><span class="fw-bold">Sas:</span> Slicer [Avg size]</p>
-                    <p class="card-text"><span class="fw-bold">Ssv:</span> Slicer [Delay]</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-4">
-                <div class="card">
-                  <h5 class="card-header bg-primary text-white">Operating system</h5>
-                  <div class="card-body">
-                    <p class="card-text"><span class="fw-bold">CPU:</span> Processor quota</p>
-                    <p class="card-text"><span class="fw-bold">Mem:</span> Container memory</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row" id="proxy-container"></div>
       </div>
     </div>
-    <div class="row">
-      <div id="load-container" class="col-sm"></div>
-    </div>
+    <div class="row" id="load-container"></div>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
