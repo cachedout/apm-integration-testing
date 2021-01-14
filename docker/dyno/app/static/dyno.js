@@ -368,23 +368,25 @@ function drawServiceEnable(service_name) {
       });
   $(`#checkbox-${service_name}`).click(function() {
     if (this.checked) {
-      $.get({
-        url: window.location.origin + "/api/enable?proxy="+service_name,
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(result){
-          console.log('Sent request to enable. result: ' + result)
-        }
-      });
+      $.get(generateEnableDisableProxyObject(true, service_name));
     } else {
-      $.get({
-        url: window.location.origin + "/api/disable?proxy="+service_name,
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(result){
-          console.log('Sent request to disable. result: ' + result)
-        }
-      });
+      $.get(generateEnableDisableProxyObject(false, service_name));
     }
   });
+}
+
+function generateEnableDisableProxyObject(enable, serviceName) {
+  let enableStr = 'disable';
+  if (enable) {
+    enableStr = 'enable';
+  }
+
+  return {
+    url: window.location.origin + "/api/" + enableStr + "?proxy="+serviceName,
+    contentType: "application/json",
+    dataType: 'json',
+    success: function(result){
+      console.log('Sent request to ' + enableStr + '. result: ' + result)
+    }
+  }
 }
