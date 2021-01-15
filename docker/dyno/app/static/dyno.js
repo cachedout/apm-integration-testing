@@ -147,7 +147,7 @@ function drawLg(r) {
               data: JSON.stringify(job_data),
               dataType: 'json',
               success: function(result){
-                console.log('Sent request to enable LG in '+ service_name +'. result: ' + result)
+                console.log('Sent request to enable LG in '+ service_name +'. result: ' + JSON.stringify(result))
               }
             })
       } else {
@@ -156,7 +156,7 @@ function drawLg(r) {
           contentType: "application/json",
           dataType: 'json',
           success: function(result){
-            console.log('Sent request to disable LG. result: ' + result)
+            console.log('Sent request to disable LG'+ service_name +'. result: ' + JSON.stringify(result))
           }
         });
       }
@@ -278,7 +278,7 @@ function drawSliders(service_name){
     contentType: "application/json",
     dataType: 'json',
     success: function(result){
-      console.log(result);
+      console.log(JSON.stringify(result));
 
       // setup EQ for Docker
       $( "#eq-"+ service_name+" > ul > li > ul > li > .docker_slide" ).each(function() {
@@ -382,7 +382,7 @@ function generateEnableDisableProxyObject(enable, serviceName) {
     contentType: "application/json",
     dataType: 'json',
     success: function(result){
-      console.log('Sent request to ' + enableStr + ' ' + serviceName +  '. result: ' + result)
+      console.log('Sent request to ' + enableStr + ' ' + serviceName +  '. result: ' + JSON.stringify(result))
     }
   }
 }
