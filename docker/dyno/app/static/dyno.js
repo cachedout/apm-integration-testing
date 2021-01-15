@@ -88,7 +88,9 @@ function drawProxies(r) {
 function drawProxy(proxy) {  
   $("#proxy-container").append(
     `<div class="col-lg-4"><div class="card" id="${ proxy.name }-card">
-    <h5 class="card-header" id="${ proxy.name }-header">${proxy.name}</h5>
+    <h5 class="card-header" id="${ proxy.name }-header">
+      <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="checkbox-${proxy.name}"><label class="form-check-label" for="checkbox-${proxy.name}">${proxy.name}</label></div>
+    </h5>
     <div class="card-body" id="${ proxy.name }-container"></div>
   </div></div>`
     );
@@ -350,10 +352,6 @@ function handleToxiSlideChange(event, ui){
 }
 
 function drawServiceEnable(service_name) {
-  $( `#eq-${ service_name }`).before(
-    `<div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="checkbox-${ service_name }"><label class="form-check-label" for="checkbox-${ service_name }">Enabled?</label></div>`
-  );
-
   $.get({
         url: `http://localhost:`+window.location.port+`/api/app?name=${service_name}`,
         contentType: "application/json",
