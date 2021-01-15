@@ -95,7 +95,7 @@ function drawProxy(proxy) {
   </div></div>`
     );
   drawSliders(proxy.name);
-  drawServiceEnable(proxy.name);
+  updateServiceEnableState(proxy.name);
 }
 
 function drawLg(r) {
@@ -351,7 +351,7 @@ function handleToxiSlideChange(event, ui){
   $(ui.handle).closest('div').find(`#${event.target.id}-val`).text(ui.value);
 }
 
-function drawServiceEnable(service_name) {
+function updateServiceEnableState(service_name) {
   $.get({
         url: `http://localhost:`+window.location.port+`/api/app?name=${service_name}`,
         contentType: "application/json",
