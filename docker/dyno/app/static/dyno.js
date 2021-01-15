@@ -313,7 +313,7 @@ function handleMolotovSlideChange(event, ui){
   } else if (ui.handle.parentElement.id == 'Er'){
     d = JSON.stringify({'job': service, 'error_weight': ui.value});
   }
-  
+  console.log('molotov change: ' + d);
   $.ajax({
     type: "POST",
     url: 'http://localhost:8999/api/update',
@@ -325,12 +325,13 @@ function handleMolotovSlideChange(event, ui){
 }
 
 function handleDockerSlideChange(event, ui){
-  c = ui.handle.parentElement.attributes.service_name.value;
+  proxy = ui.handle.parentElement.attributes.service_name.value;
   component = ui.handle.parentElement.id;
   v = ui.value;
+  console.log('docker change: ' + JSON.stringify({'proxy': proxy, 'metric': component, 'val': Math.abs(100- ui.value)}));
   $.ajax({
     type: "GET",
-    url: window.location.origin + `/api/docker/update?c=${c}&component=${component}&val=${v}`,
+    url: window.location.origin + `/api/docker/update?c=${proxy}&component=${component}&val=${v}`,
     dataType: 'json',
     contentType: 'application/json'
   });
