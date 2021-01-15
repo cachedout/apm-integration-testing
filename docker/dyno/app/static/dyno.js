@@ -163,37 +163,34 @@ function drawLg(r) {
   })
 }
 
-
+function drawSliderItem(id, sliderClassType, color) {
+  return `<li class="list-group-item p-1 border-0">
+    <ul class="list-group">
+      <li class="list-group-item p-1">
+        <span id="${id}" class="slider ${sliderClassType}_slide"></span>
+      </li>
+      <li class="list-group-item p-1 bg-${color} text-white text-center">
+        <span>${id}</span>
+      </li>
+    </ul>
+  </li>`;
+}
 
 function drawSliders(service_name){
   $ ("#"+service_name+"-container").append(
-    '<div id="eq-'+service_name+`" class="eq">\
-      <table>\
-        <tr>\
-        <td><span id="W" class="slider molotov_slide"></span></td>\
-        <td><span id="Er" class="slider molotov_slide"></span></td>\
-        <td><span id="L" class="slider toxi_slide"></span></td>\
-        <td><span id="J" class="slider toxi_slide"></span></td>\
-        <td><span id="B" class="slider toxi_slide"></span></td>\
-        <td><span id="SC" class="slider toxi_slide"></span></td>\
-        <td><span id="Sas" class="slider toxi_slide"></span></td>\
-        <td><span id="Sd" class="slider toxi_slide"></span></td>\
-        <td><span id="CPU" class="slider docker_slide"></span></td>\
-        <td><span id="Mem" class="slider docker_slide"></span></td>\
-        </tr>\
-        <tr>\
-        <td align="center"><div class="p-1 mb-1 bg-success text-white">W</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-success text-white">Er</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">L</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">J</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">B</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">SC</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">Sas</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-danger text-white">Sd</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-primary text-white">CPU</div></td>\
-        <td align="center"><div class="p-1 mb-1 bg-primary text-white">Mem</div></td>\
-        </tr>\
-      </table>\
+    '<div id="eq-'+service_name+`" class="eq container-fluid">\
+      <ul class="list-group list-group-horizontal">
+        ${drawSliderItem('W', 'molotov', 'success')}
+        ${drawSliderItem('Er', 'molotov', 'success')}
+        ${drawSliderItem('L', 'toxi', 'danger')}
+        ${drawSliderItem('J', 'toxi', 'danger')}
+        ${drawSliderItem('B', 'toxi', 'danger')}
+        ${drawSliderItem('SC', 'toxi', 'danger')}
+        ${drawSliderItem('Sas', 'toxi', 'danger')}
+        ${drawSliderItem('Sd', 'toxi', 'danger')}
+        ${drawSliderItem('CPU', 'docker', 'primary')}
+        ${drawSliderItem('Mem', 'docker', 'primary')}
+      </ul>\
   </div>`
   );
 
@@ -208,7 +205,7 @@ function drawSliders(service_name){
           //   return
           // }
 
-          $( "#eq-"+ service_name+" > table > tbody > tr > td > .molotov_slide" ).each(function() {
+          $( "#eq-"+ service_name+" > ul > li > ul > li > .molotov_slide" ).each(function() {
             var lg_name = service_name.replace("opbeans-", "")
             if (result[lg_name]){
               console.log('found it', result[lg_name])
@@ -253,7 +250,7 @@ function drawSliders(service_name){
         dataType: 'json',
         success: function(result){
 
-          $( "#eq-"+ service_name+" > table > tbody > tr > td > .toxi_slide" ).each(function() {
+          $( "#eq-"+ service_name+" > ul > li > ul > li > .toxi_slide" ).each(function() {
             var previouslySetSlider = result.toxics[this.id];
             var sliderVal = 0;
             if (previouslySetSlider != 0 && typeof previouslySetSlider !== 'undefined') {
@@ -282,7 +279,7 @@ function drawSliders(service_name){
       console.log(result);
 
       // setup EQ for Docker
-      $( "#eq-"+ service_name+" > table > tbody > tr > td > .docker_slide" ).each(function() {
+      $( "#eq-"+ service_name+" > ul > li > ul > li > .docker_slide" ).each(function() {
         var previouslySetSlider = result[this.id];
         var sliderVal = 100;
         if (previouslySetSlider != 0 && typeof previouslySetSlider !== 'undefined') {
