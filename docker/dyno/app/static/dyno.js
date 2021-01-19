@@ -72,12 +72,20 @@ function processMolotov(data){
           } else {
             sparkMap['getMap'][h] = [v];
           }
-    $('#get_stats_table').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${v * 12}</td></tr>`);
+    let value = 0;
+    if (v) {
+      value = v * 12;
+    }
+    $('#get_stats_table').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${value}</td></tr>`);
     $(`#get-spark-${h}`).sparkline(sparkMap['getMap'][h])
 
   }
   for (let [h, v] of Object.entries(post_stats)){
-    $('#post_stats_table').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${v * 20}</td></tr>`);
+    let value = 0;
+    if (v) {
+      value = v * 20;
+    }
+    $('#post_stats_table').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${value}</td></tr>`);
   }
 }
 
