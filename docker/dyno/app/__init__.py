@@ -20,6 +20,11 @@ def create_app(config_class=Cfg):
 app = create_app()
 
 
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 31536000
+    return response
+
 
 @app.route('/')
 def index():
