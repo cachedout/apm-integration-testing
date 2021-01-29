@@ -164,7 +164,7 @@ function drawLg(r) {
           contentType: "application/json",
           dataType: 'json',
           success: function(result){
-            console.log('Sent request to disable LG'+ service_name +'. result: ' + JSON.stringify(result))
+            console.log('Sent request to disable LG in '+ service_name +'. result: ' + JSON.stringify(result))
           }
         });
       }
