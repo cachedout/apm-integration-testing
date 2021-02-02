@@ -53,10 +53,15 @@ function processMolotov(data){
       } 
     }
   }
-  $('#get_stats').empty();
-  $('#post_stats').empty();
-  $('#get_stats').text('GET req/min');
-  $('#post_stats').text('POST req/min');
+  $('#get_stats').html(`<h5 class="card-header bg-success text-white">GET req/min</h5>
+  <div class="card-body">
+    <table id="get_stats_table" style="float:left;"></table>
+  </div>`);
+  $('#post_stats').html(`<h5 class="card-header bg-success text-white">POST req/min</h5>
+  <div class="card-body">
+    <table id="post_stats_table" style="float:left;"></table>
+  </div>`);
+
   for (let [h, v] of Object.entries(get_stats)){
 
     if (Object.keys(sparkMap.getMap).includes(h)){
@@ -67,12 +72,20 @@ function processMolotov(data){
           } else {
             sparkMap['getMap'][h] = [v];
           }
-    $('#get_stats').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${v * 12}</td></tr>`);
+    let value = 0;
+    if (v) {
+      value = v * 12;
+    }
+    $('#get_stats_table').append(`<tr><td>${h}</td><td><span id="get-spark-${h}" style="float:left;"></span></td><td>${value}</td></tr>`);
     $(`#get-spark-${h}`).sparkline(sparkMap['getMap'][h])
 
   }
   for (let [h, v] of Object.entries(post_stats)){
-    $('#post_stats').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${v * 20}</td></tr>`);
+    let value = 0;
+    if (v) {
+      value = v * 20;
+    }
+    $('#post_stats_table').append(`<tr><td>${h}</td><span id="post-spark-${h}" style="float:left;"></span></td><td>${value}</td></tr>`);
   }
 }
 
@@ -82,12 +95,15 @@ function drawProxies(r) {
 
 function drawProxy(proxy) {  
   $("#proxy-container").append(
-    `<div style="float:left;" id="${ proxy.name }-container">` + 
-    `<p id="${ proxy.name }-header" class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">` +
-    `<span style="float:left; margin:-2px 5px 0 0;" class="proxy-name">${proxy.name}</span></p></div>`
+    `<div class="col-lg-4"><div class="card" id="${ proxy.name }-card">
+    <h5 class="card-header" id="${ proxy.name }-header">
+      <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="checkbox-${proxy.name}"><label class="form-check-label" for="checkbox-${proxy.name}">${proxy.name}</label></div>
+    </h5>
+    <div class="card-body" id="${ proxy.name }-container"></div>
+  </div></div>`
     );
   drawSliders(proxy.name);
-  drawServiceEnable(proxy.name);
+  updateServiceEnableState(proxy.name);
 }
 
 function drawLg(r) {
@@ -104,11 +120,12 @@ function drawLg(r) {
     var port = s.listen.split(":").pop();
     if (service_name.startsWith("opbeans")){
       $("#load-controls").append(
-        `<div id="${service_name}-container">` +
-        `<p id="${service_name}-header" class="ui-state-default ui-corner-all ui-helper-clearfix" style="padding:4px;">` +
-        `<span style="margin:-2px 5px 0 0;">${service_name}</span>` +
-        `</p><fieldset><label for="lg-checkbox-${ service_name }">Load test<input type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${service_name}"></label></fieldset>` +
-        `</div>`
+        `<div class="card" id="${service_name}-container">
+        <h5 class="card-header bg-secondary text-white">#${idx} - ${service_name}</h5>
+        <div class="card-body">
+        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" name="lg-checkbox-${service_name}" id="lg-checkbox-${ service_name }"><label class="form-check-label" for="lg-checkbox-${ service_name }">Load test</label></div>
+        </div>
+      </div>`
       );
       // Check the box if a job is already running
       $.get({
@@ -138,7 +155,7 @@ function drawLg(r) {
               data: JSON.stringify(job_data),
               dataType: 'json',
               success: function(result){
-                console.log('Sent request to enable LG. result: ' + result)
+                console.log('Sent request to enable LG in '+ service_name +'. result: ' + JSON.stringify(result))
               }
             })
       } else {
@@ -147,7 +164,7 @@ function drawLg(r) {
           contentType: "application/json",
           dataType: 'json',
           success: function(result){
-            console.log('Sent request to disable LG. result: ' + result)
+            console.log('Sent request to disable LG in '+ service_name +'. result: ' + JSON.stringify(result))
           }
         });
       }
@@ -156,48 +173,34 @@ function drawLg(r) {
   })
 }
 
-
+function drawSliderItem(id, sliderClassType, color) {
+  return `<li class="list-group-item p-1 border-0">
+    <ul class="list-group">
+      <li class="list-group-item p-1">
+        <span id="${id}" class="slider ${sliderClassType}_slide"></span>
+      </li>
+      <li class="list-group-item p-1 bg-${color} text-white text-center">
+        <span>${id}</span>
+      </li>
+    </ul>
+  </li>`;
+}
 
 function drawSliders(service_name){
   $ ("#"+service_name+"-container").append(
-    '<div style="margin: 15px" id="eq-'+service_name+`" class="eq">\
-      <table>\
-        <tr>\
-        <td><span id="W" class="molotov_slide"></span></td>\
-        <td><span id="Er" class="molotov_slide"></span></td>\
-        <td><span id="L" class="toxi_slide"></span></td>\
-        <td><span id="J" class="toxi_slide"></span></td>\
-        <td><span id="B" class="toxi_slide"></span></td>\
-        <td><span id="SC" class="toxi_slide"></span></td>\
-        <td><span id="Sas" class="toxi_slide"></span></td>\
-        <td><span id="Ssd" class="toxi_slide"></span></td>\
-        <td><span id="CPU" class="docker_slide"></span></td>\
-        <td><span id="Mem" class="docker_slide"></span></td>\
-        </tr>\
-        <tr>\
-        <td align="center">W</td>\
-        <td align="center">Er</td>\
-        <td align="center">L</td>\
-        <td align="center">J</td>\
-        <td align="center">B</td>\
-        <td align="center">SC</td>\
-        <td align="center">Sas</td>\
-        <td align="center">Ssd</td>\
-        <td align="center">CPU</td>\
-        <td align="center">Mem</td>\
-        </tr>\
-        <tr>\
-        <td align="center"><div style="color:#68B847">&#9632;</div></td>\
-        <td align="center"><div style="color:#68B847">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#B84768">&#9632;</div></td>\
-        <td align="center"><div style="color:#4768B8">&#9632;</div></td>\
-        <td align="center"><div style="color:#4768B8">&#9632;</div></td>\
-      </table>\
+    '<div id="eq-'+service_name+`" class="eq container-fluid">\
+      <ul class="list-group list-group-horizontal">
+        ${drawSliderItem('W', 'molotov', 'success')}
+        ${drawSliderItem('Er', 'molotov', 'success')}
+        ${drawSliderItem('L', 'toxi', 'danger')}
+        ${drawSliderItem('J', 'toxi', 'danger')}
+        ${drawSliderItem('B', 'toxi', 'danger')}
+        ${drawSliderItem('SC', 'toxi', 'danger')}
+        ${drawSliderItem('Sas', 'toxi', 'danger')}
+        ${drawSliderItem('Sd', 'toxi', 'danger')}
+        ${drawSliderItem('CPU', 'docker', 'primary')}
+        ${drawSliderItem('Mem', 'docker', 'primary')}
+      </ul>\
   </div>`
   );
 
@@ -212,7 +215,7 @@ function drawSliders(service_name){
           //   return
           // }
 
-          $( "#eq-"+ service_name+" > table > tbody > tr > td > .molotov_slide" ).each(function() {
+          $( "#eq-"+ service_name+" > ul > li > ul > li > .molotov_slide" ).each(function() {
             var lg_name = service_name.replace("opbeans-", "")
             if (result[lg_name]){
               console.log('found it', result[lg_name])
@@ -257,7 +260,7 @@ function drawSliders(service_name){
         dataType: 'json',
         success: function(result){
 
-          $( "#eq-"+ service_name+" > table > tbody > tr > td > .toxi_slide" ).each(function() {
+          $( "#eq-"+ service_name+" > ul > li > ul > li > .toxi_slide" ).each(function() {
             var previouslySetSlider = result.toxics[this.id];
             var sliderVal = 0;
             if (previouslySetSlider != 0 && typeof previouslySetSlider !== 'undefined') {
@@ -283,10 +286,10 @@ function drawSliders(service_name){
     contentType: "application/json",
     dataType: 'json',
     success: function(result){
-      console.log(result);
+      console.log(JSON.stringify(result));
 
       // setup EQ for Docker
-      $( "#eq-"+ service_name+" > table > tbody > tr > td > .docker_slide" ).each(function() {
+      $( "#eq-"+ service_name+" > ul > li > ul > li > .docker_slide" ).each(function() {
         var previouslySetSlider = result[this.id];
         var sliderVal = 100;
         if (previouslySetSlider != 0 && typeof previouslySetSlider !== 'undefined') {
@@ -317,7 +320,7 @@ function handleMolotovSlideChange(event, ui){
   } else if (ui.handle.parentElement.id == 'Er'){
     d = JSON.stringify({'job': service, 'error_weight': ui.value});
   }
-  
+  console.log('molotov change: ' + d);
   $.ajax({
     type: "POST",
     url: 'http://localhost:8999/api/update',
@@ -329,12 +332,13 @@ function handleMolotovSlideChange(event, ui){
 }
 
 function handleDockerSlideChange(event, ui){
-  c = ui.handle.parentElement.attributes.service_name.value;
+  proxy = ui.handle.parentElement.attributes.service_name.value;
   component = ui.handle.parentElement.id;
   v = ui.value;
+  console.log('docker change: ' + JSON.stringify({'proxy': proxy, 'metric': component, 'val': Math.abs(100- ui.value)}));
   $.ajax({
     type: "GET",
-    url: window.location.origin + `/api/docker/update?c=${c}&component=${component}&val=${v}`,
+    url: window.location.origin + `/api/docker/update?c=${proxy}&component=${component}&val=${v}`,
     dataType: 'json',
     contentType: 'application/json'
   });
@@ -355,41 +359,38 @@ function handleToxiSlideChange(event, ui){
   $(ui.handle).closest('div').find(`#${event.target.id}-val`).text(ui.value);
 }
 
-function drawServiceEnable(service_name) {
-  $( `#${ service_name }-header`).after(
-    `<fieldset><label for="checkbox-${ service_name }">Enabled?<input type="checkbox" name="checkbox-${ service_name }" id="checkbox-${ service_name }"></label></fieldset>`
-  );
-  $( "input[type='checkbox']" ).checkboxradio();
+function updateServiceEnableState(service_name) {
   $.get({
         url: `http://localhost:`+window.location.port+`/api/app?name=${service_name}`,
         contentType: "application/json",
         dataType: 'json',
         success: function(result){
             if (result.enabled == true){
-              $(`#checkbox-${ service_name }`).prop('checked',true).checkboxradio('refresh');
+              $(`#checkbox-${ service_name }`).prop('checked',true);
             }
         }
       });
   $(`#checkbox-${service_name}`).click(function() {
     if (this.checked) {
-      $.get({
-        url: window.location.origin + "/api/enable?proxy="+service_name,
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(result){
-          console.log('Sent request to enable. result: ' + result)
-        }
-      });
+      $.get(generateEnableDisableProxyObject(true, service_name));
     } else {
-      $.get({
-        url: window.location.origin + "/api/disable?proxy="+service_name,
-        contentType: "application/json",
-        dataType: 'json',
-        success: function(result){
-          console.log('Sent request to disable. result: ' + result)
-        }
-      });
+      $.get(generateEnableDisableProxyObject(false, service_name));
     }
   });
 }
 
+function generateEnableDisableProxyObject(enable, serviceName) {
+  let enableStr = 'disable';
+  if (enable) {
+    enableStr = 'enable';
+  }
+
+  return {
+    url: window.location.origin + "/api/" + enableStr + "?proxy="+serviceName,
+    contentType: "application/json",
+    dataType: 'json',
+    success: function(result){
+      console.log('Sent request to ' + enableStr + ' ' + serviceName +  '. result: ' + JSON.stringify(result))
+    }
+  }
+}
